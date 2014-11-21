@@ -1,4 +1,9 @@
 package stream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import twitter4j.FilterQuery;
 import twitter4j.GeoLocation;
 import twitter4j.RateLimitStatusEvent;
@@ -10,13 +15,12 @@ import twitter4j.StatusListener;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
-
 import database.DatabaseOperation;
 
 public class SimpleStream {
 	static int numOfRecordsCollected = 0, limit = 100000;
 	static String[] listHappiness = {":-)", ":)", ";)", "<3", ":D", ":P", ":D", ":P", ";-)", ":-D", "XD", ":')", "=)", "C:", ":L", ":3", ";D", ":-P", ";-P", ":d", ":*", "=D", "d^_^b", ":-9", ":'-)", ":)))", "n_n", ":O)", "^_^", "=P", "(;", ":]", ";P", "/-)", ":'3", "^.^", ":}", ";-D", ";')", "=]", "C':", ";]", ":-*", ":'D", ":1", "(-;", ";L", ">:)", "X-D", "B-)", ":>", "8-D"};
-	
+	static String[] listSadness = {"ahahah"};
     public static void main(String[] args) {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true);
@@ -66,6 +70,7 @@ public class SimpleStream {
                 System.out.println(content);///
                 System.out.println(xlabel);///
                 System.out.println(ylabel);///
+                
                 try {
                 	for(int i = 0; i < listHappiness.length; i++){
                 		if(content.toLowerCase().contains(listHappiness[i].toLowerCase())){
@@ -95,6 +100,12 @@ public class SimpleStream {
         FilterQuery fq = new FilterQuery();
     
         String keywords[] = listHappiness;
+//        System.out.println(Arrays.toString(listHappiness));
+//		System.out.println(Arrays.toString(listSadness));
+//		List<String> all = new ArrayList<String>(listHappiness.length + listSadness.length);
+//	    Collections.addAll(all, listHappiness);
+//	    Collections.addAll(all, listSadness);
+//	    System.out.println(Arrays.toString(all.toArray(new String[all.size()])));
 
         fq.track(keywords);
 
